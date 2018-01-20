@@ -20,7 +20,7 @@ public class Javafx_BasicPlayStyle extends Application {
         board b = new board();
         background.getChildren().add(b);
     }
-    
+
     class board extends ImageView{
         board(){
             setImage(new Image(Javafx_BasicPlayStyle.class.getResource(URI_BASE + "board"+".jpg").toString()));
@@ -30,9 +30,14 @@ public class Javafx_BasicPlayStyle extends Application {
                 if (event.getButton() == MouseButton.PRIMARY){
                     double x = event.getSceneX();
                     double y = event.getSceneY();
-                    ImageView piece = new ImageView(new Image(Javafx_BasicPlayStyle.class.getResource(URI_BASE + "piece"+".png").toString()));
+                    Image pieceImage = (new Image(Javafx_BasicPlayStyle.class.getResource(URI_BASE + "piece"+".png").toString()));
+                    ImageView piece = new ImageView();
+                    piece.setImage(pieceImage);
                     piece.setTranslateX(x);
                     piece.setTranslateY(y);
+                    piece.setFitHeight(90);
+                    piece.setFitWidth(90);
+                    root.getChildren().add(piece);
                 }
             });
         }
