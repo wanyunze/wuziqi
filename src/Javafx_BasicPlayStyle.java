@@ -23,14 +23,14 @@ public class Javafx_BasicPlayStyle extends Application {
 
     class board extends ImageView{
         board(){
-            setImage(new Image(Javafx_BasicPlayStyle.class.getResource(URI_BASE + "board"+".jpg").toString()));
+            setImage(new Image(Javafx_BasicPlayStyle.class.getResource(URI_BASE + "棋盘"+".jpg").toString()));
             setFitHeight(900);
             setFitWidth(900);
             setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.PRIMARY){
                     double x = event.getSceneX();
                     double y = event.getSceneY();
-                    Image pieceImage = (new Image(Javafx_BasicPlayStyle.class.getResource(URI_BASE + "piece"+".png").toString()));
+                    Image pieceImage = (new Image(Javafx_BasicPlayStyle.class.getResource(URI_BASE + "棋子"+".png").toString()));
                     ImageView piece = new ImageView();
                     piece.setImage(pieceImage);
                     piece.setTranslateX(x);

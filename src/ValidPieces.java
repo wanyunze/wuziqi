@@ -63,7 +63,7 @@ public class ValidPieces {
         return (letterCheck && numberCheck);
     }
 
-    //多个棋子 傻逼黎快做 做不出拖出去举报
+    //***************************************多个棋子 傻逼黎快做 做不出拖出去举报***************************************
     static boolean isPlacementsWellFormed(String placements) {
 
         return false;
