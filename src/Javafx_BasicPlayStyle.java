@@ -5,6 +5,11 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseButton;
 import javafx.stage.Stage;
+import javafx.animation.KeyFrame;
+import javafx.animation.Timeline;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Pane;
+import javafx.util.Duration;
 
 /**
  * Created by 万运泽 on 2018/1/17.
@@ -18,10 +23,13 @@ public class Javafx_BasicPlayStyle extends Application {
     private boolean toggleBlack = true;
     private String placementsBlack = "";
     private String placementsWhite = "";
+    private int tmp = 60;
 
     private void setup(){
         board b = new board();
         background.getChildren().add(b);
+        Clock c = new Clock();
+        background.getChildren().add(c);
     }
 
     private String locationToString(double x, double y){
@@ -52,8 +60,16 @@ public class Javafx_BasicPlayStyle extends Application {
         return output;
     }
 
-    class board extends ImageView{
+    class board extends ImageView {
         board(){
+            if (tmp == 58) {
+                Label a = new Label("HEHE");
+                a.setFont(javafx.scene.text.Font.font(60));
+                a.setTranslateY(100);
+                a.setTranslateX(1050);
+                root.getChildren().add(a);
+            }
+
             setImage(new Image(Javafx_BasicPlayStyle.class.getResource(URI_BASE + "棋盘"+".jpg").toString()));
             setFitHeight(900);
             setFitWidth(900);
@@ -114,7 +130,7 @@ public class Javafx_BasicPlayStyle extends Application {
                         while (startX <= boundary) {
                             if ((x <= startX + deviation && x >= startX - deviation) && (y <= startY + deviation && y >= startY - deviation)) {
                                 if (toggleBlack) {
-                                    placementsBlack += locationToString(startX,startY) + "_";
+                                    placementsBlack += (locationToString(startX,startY) + "_");
                                     // black turn, next it's white hence false
                                     toggleBlack = false;
                                     //setup black pieces
@@ -151,6 +167,32 @@ public class Javafx_BasicPlayStyle extends Application {
                     }
                 }
             });
+        }
+
+    }
+
+    public class Clock extends Pane {
+        private Timeline animation;
+        private String S = "";
+
+        Label label = new Label("60");
+
+
+        private Clock() {
+            label.setFont(javafx.scene.text.Font.font(40));
+            label.setTranslateX(1030);
+            label.setTranslateY(35);
+
+            getChildren().add(label);
+            animation = new Timeline(new KeyFrame(Duration.millis(1000), e -> timelabel()));
+            animation.setCycleCount(60);
+            animation.play();
+        }
+
+        private void timelabel() {
+            tmp--;
+            S = tmp + "";
+            label.setText(S);
         }
 
     }
