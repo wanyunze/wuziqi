@@ -9,7 +9,7 @@ public class ValidPieces {
     // 棋子必须得在棋盘上 并且不能有重复的
 
     //单一棋子function
-    static boolean isPlacementWellFormed(String placement){
+    static boolean isPlacementWellFormed(String placement) {
         char[] placementArray = placement.toCharArray();
         char validLetter = 'A';
         char validNumber = '1';
@@ -21,7 +21,7 @@ public class ValidPieces {
             if (placementArray[0] == validLetter) {
                 letterCheck = true;
                 break;
-            }else{
+            } else {
                 validLetter++;
             }
         }
@@ -37,39 +37,37 @@ public class ValidPieces {
             }
         }
         // if it's length of 3. convert the string to number and check if it's between 10-15
-        else if (placementArray.length == 3){
-           String numberString = placementArray[1] + "" +placementArray[2];
-           // if It's not number, throw exception to avoid bugs
-           try {
-               Integer.parseInt(numberString);
-           }catch(NumberFormatException e){
-               return false;
-           }
+        else if (placementArray.length == 3) {
+            String numberString = placementArray[1] + "" + placementArray[2];
+            // if It's not number, throw exception to avoid bugs
+            try {
+                Integer.parseInt(numberString);
+            } catch (NumberFormatException e) {
+                return false;
+            }
             int number = Integer.parseInt(numberString);
-           while (validNumberInt <= 15){
-               if (number == validNumberInt){
-                   numberCheck = true;
-                   break;
-               }else{
-                   validNumberInt++;
-               }
-           }
+            while (validNumberInt <= 15) {
+                if (number == validNumberInt) {
+                    numberCheck = true;
+                    break;
+                } else {
+                    validNumberInt++;
+                }
+            }
         }
         // if the length is incorrect, return false
-        else{
+        else {
             return false;
         }
 
         return (letterCheck && numberCheck);
     }
 
-    //***************************************多个棋子 傻逼黎快做 做不出拖出去举报***************************************
-    static boolean isPlacementsWellFormed(String placements) {
+    // Check if intake placement it's inside placements.
+    // e.g. "A14_B9_O15_" "A14"
+    // return false
+    static boolean isPlacementsWellFormed(String placements, String intakePlacement) {
 
-        return false;
-    }
-
-    private static boolean helperDuplicates(String placements) {
         return false;
     }
 }

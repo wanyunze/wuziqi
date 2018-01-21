@@ -3,7 +3,7 @@
  */
 public class WinPieces {
     // return true if 五子在横竖斜上
-    static boolean winPieces(){
+    public static boolean winPieces(String place){
         return false;
     }
 }
