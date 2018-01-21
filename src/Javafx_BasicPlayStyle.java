@@ -11,6 +11,8 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.util.Duration;
 
+import java.sql.Time;
+
 /**
  * Created by 万运泽 on 2018/1/17.
  */
@@ -56,8 +58,7 @@ public class Javafx_BasicPlayStyle extends Application {
                 startY += space;
             }
         }
-        String output = startLetter + "" + startNumber;
-        return output;
+        return startLetter + "" + startNumber;
     }
 
     class board extends ImageView {
@@ -129,6 +130,7 @@ public class Javafx_BasicPlayStyle extends Application {
                     while (startY <= boundary) {
                         while (startX <= boundary) {
                             if ((x <= startX + deviation && x >= startX - deviation) && (y <= startY + deviation && y >= startY - deviation)) {
+                                tmp = 61;
                                 if (toggleBlack) {
                                     placementsBlack += (locationToString(startX,startY) + "_");
                                     // black turn, next it's white hence false
@@ -185,12 +187,14 @@ public class Javafx_BasicPlayStyle extends Application {
 
             getChildren().add(label);
             animation = new Timeline(new KeyFrame(Duration.millis(1000), e -> timelabel()));
-            animation.setCycleCount(60);
+            animation.setCycleCount(Timeline.INDEFINITE);
             animation.play();
         }
 
         private void timelabel() {
-            tmp--;
+            if (tmp > 0) {
+                tmp--;
+            }
             S = tmp + "";
             label.setText(S);
         }
