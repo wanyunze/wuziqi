@@ -16,10 +16,40 @@ public class Javafx_BasicPlayStyle extends Application {
     private final Group root = new Group();
     private final Group background = new Group();
     private boolean toggleBlack = true;
+    private String placementsBlack = "";
+    private String placementsWhite = "";
 
     private void setup(){
         board b = new board();
         background.getChildren().add(b);
+    }
+
+    private String locationToString(double x, double y){
+        double startX = 24;
+        double startY = 25;
+        char startLetter = 'A';
+        int startNumber = 1;
+        double space = 58;
+
+        while (startLetter <'O') {
+            if (x == startX) {
+                break;
+            }else{
+                startLetter++;
+                startX += space;
+            }
+        }
+
+        while (startNumber <15) {
+            if (y == startY) {
+                break;
+            }else{
+                startNumber++;
+                startY += space;
+            }
+        }
+        String output = startLetter + "" + startNumber;
+        return output;
     }
 
     class board extends ImageView{
@@ -27,6 +57,7 @@ public class Javafx_BasicPlayStyle extends Application {
             setImage(new Image(Javafx_BasicPlayStyle.class.getResource(URI_BASE + "棋盘"+".jpg").toString()));
             setFitHeight(900);
             setFitWidth(900);
+
             Image whiteBoxImage = (new Image(Javafx_BasicPlayStyle.class.getResource(URI_BASE + "白棋盒" + ".png").toString()));
             ImageView whiteBox = new ImageView();
             whiteBox.setImage(whiteBoxImage);
@@ -61,7 +92,6 @@ public class Javafx_BasicPlayStyle extends Application {
             whiteTurn.setFitHeight(200);
             whiteTurn.setFitWidth(200);
 
-
             setOnMouseClicked(event -> {
                 if (event.getButton() == MouseButton.PRIMARY){
                     double x = event.getSceneX()-20;
@@ -84,6 +114,7 @@ public class Javafx_BasicPlayStyle extends Application {
                         while (startX <= boundary) {
                             if ((x <= startX + deviation && x >= startX - deviation) && (y <= startY + deviation && y >= startY - deviation)) {
                                 if (toggleBlack) {
+                                    placementsBlack += locationToString(startX,startY) + "_";
                                     // black turn, next it's white hence false
                                     toggleBlack = false;
                                     //setup black pieces
@@ -98,6 +129,7 @@ public class Javafx_BasicPlayStyle extends Application {
                                     root.getChildren().add(whiteTurn);
                                     root.getChildren().add(blackBox);
                                 }else{
+                                    placementsWhite += locationToString(startX,startY) +  "_";
                                     pieceWhite.setImage(pieceImageWhite);
                                     pieceWhite.setTranslateX(startX);
                                     pieceWhite.setTranslateY(startY);
